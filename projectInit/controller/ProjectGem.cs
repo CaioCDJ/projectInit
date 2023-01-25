@@ -1,6 +1,5 @@
 using CliWrap;
 using Spectre.Console;
-using System.IO;
 
 namespace projectInit;
 
@@ -8,20 +7,22 @@ public class ProjectGem{
 
   public async static Task newProject(Project project){ 
     await AnsiConsole.Status()
-      .AutoRefresh(true)
       .Spinner(Spinner.Known.Arc)
       .SpinnerStyle(Style.Parse("green bold"))
-      .StartAsync("[green]Creating the project[/]",async ctx=>{
+      .StartAsync("[blue]Creating the project[/]",async ctx=>{
         
+        ctx.Status("[blue]Generating Folders...[/]");
         await defaultEstruc(project.name);
-        AnsiConsole.Markup("Folder created...");
-        Thread.Sleep(500);
+        AnsiConsole.MarkupLine("[green]Folders Generated[/]");
+
+        Thread.Sleep(500); 
+
+        ctx.Status("[blue]Generating project[/]");
+        await Exec("dotnet",$"new { project.type } -o { project.name }/{ project.name }");
+        AnsiConsole.MarkupLine("[green]Project Generated[/]");
         
-        await Exec("dotnet",$"new {project.type} -o {project.name}/{project.name}");
-        AnsiConsole.Markup("project Generated...");
-        Thread.Sleep(500);
-       
-      });
+    });
+
   }
 
   private async static Task defaultEstruc(string name){
@@ -29,6 +30,7 @@ public class ProjectGem{
     Directory.CreateDirectory(name);
      
     await Exec("dotnet", $"new sln -o {name}");
+
     await Exec("dotnet", $"new gitignore -o {name}");
     //await Exec("git", $"init {name}");
   }
