@@ -19,8 +19,8 @@ public class ProjectGem{
 
         ctx.Status("[blue]Generating project[/]");
         await Exec("dotnet",$"new { project.type } -o { project.name }/{ project.name }");
-        AnsiConsole.MarkupLine("[green]Project Generated[/]");
-        
+  
+        AnsiConsole.MarkupLine("[green]Project Generated[/]");  
     });
 
   }
