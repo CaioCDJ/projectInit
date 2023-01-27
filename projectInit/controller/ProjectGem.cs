@@ -14,15 +14,15 @@ public class ProjectGem{
         ctx.Status("[blue]Generating Folders...[/]");
         await defaultEstruc(project.name);
         AnsiConsole.MarkupLine("[green]Folders Generated[/]");
-
-        Thread.Sleep(500); 
-
+       
         ctx.Status("[blue]Generating project[/]");
         await Exec("dotnet",$"new { project.type } -o { project.name }/{ project.name }");
-  
+ 
+        await Exec("dotnet",$"sln {project.name}/{project.name}.sln add {project.name}/{project.name}");
+
         AnsiConsole.MarkupLine("[green]Project Generated[/]");  
     });
-
+    Messages.Success(project);
   }
 
   private async static Task defaultEstruc(string name){
@@ -32,7 +32,6 @@ public class ProjectGem{
     await Exec("dotnet", $"new sln -o {name}");
 
     await Exec("dotnet", $"new gitignore -o {name}");
-    //await Exec("git", $"init {name}");
   }
 
   private async static Task Exec(string program, string args)
@@ -40,7 +39,7 @@ public class ProjectGem{
       .WithArguments(args)
       .ExecuteAsync();
 
-  // private async static Task AddLibs(){}
+  //private async static Task AddLibs(string[] packages){  };
 
   // private async static Task DDD(){}
 }

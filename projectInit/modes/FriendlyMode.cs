@@ -21,7 +21,7 @@ public class FriendlyMode{
 
     string[] choices = projectOptions.Keys.ToArray();
  
-    GenericUi.showTitle("Project Initializer");
+    Messages.showTitle("Project Initializer");
 
     project.type = projectOptions[Menus.show(choices)];
     project.name = GenericUi.ask("Project name");

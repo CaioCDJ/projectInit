@@ -9,11 +9,4 @@ public class GenericUi{
       new TextPrompt<string>($"[blue]{text}: [/]")
     );
   }
-  public static void showTitle(string title){
-
-    var rule = new Rule($"[green]{title}[/]");
-    rule.Justification = Justify.Left;
-    AnsiConsole.Write(rule);
-  }
-
 }
