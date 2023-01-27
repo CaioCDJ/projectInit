@@ -10,7 +10,9 @@ public class ProjectGem{
       .Spinner(Spinner.Known.Arc)
       .SpinnerStyle(Style.Parse("green bold"))
       .StartAsync("[blue]Creating the project[/]",async ctx=>{
+      .StartAsync("[blue]Creating the project[/]",async ctx=>{
         
+        ctx.Status("[blue]Generating Folders...[/]");
         ctx.Status("[blue]Generating Folders...[/]");
         await defaultEstruc(project.name);
         AnsiConsole.MarkupLine("[green]Folders Generated[/]");
@@ -30,6 +32,7 @@ public class ProjectGem{
     Directory.CreateDirectory(name);
      
     await Exec("dotnet", $"new sln -o {name}");
+
 
     await Exec("dotnet", $"new gitignore -o {name}");
   }
