@@ -9,4 +9,12 @@ public class GenericUi{
       new TextPrompt<string>($"[blue]{text}: [/]")
     );
   }
+
+  public static bool boolMenu(string text){
+    if (!AnsiConsole.Confirm($"[green]{text}[/]?")){
+    AnsiConsole.MarkupLine("Ok... :(");
+    return false;
+    }
+    return true;
+  }
 }

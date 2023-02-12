@@ -8,8 +8,7 @@ public class ProjectGem{
   public async static Task newProject(Project project){ 
     await AnsiConsole.Status()
       .Spinner(Spinner.Known.Arc)
-      .SpinnerStyle(Style.Parse("green bold"))
-      .StartAsync("[blue]Creating the project[/]",async ctx=>{
+      .SpinnerStyle(Style.Parse("blue bold"))
       .StartAsync("[blue]Creating the project[/]",async ctx=>{
         
         ctx.Status("[blue]Generating Folders...[/]");
@@ -21,7 +20,12 @@ public class ProjectGem{
         await Exec("dotnet",$"new { project.type } -o { project.name }/{ project.name }");
  
         await Exec("dotnet",$"sln {project.name}/{project.name}.sln add {project.name}/{project.name}");
+        
+        if(project.packages is not null){
 
+          ctx.Status("[blue]Adding packages[/]");
+          await AddPackages(project);
+        }
         AnsiConsole.MarkupLine("[green]Project Generated[/]");  
     });
     Messages.Success(project);
@@ -33,7 +37,6 @@ public class ProjectGem{
      
     await Exec("dotnet", $"new sln -o {name}");
 
-
     await Exec("dotnet", $"new gitignore -o {name}");
   }
 
@@ -42,7 +45,15 @@ public class ProjectGem{
       .WithArguments(args)
       .ExecuteAsync();
 
-  //private async static Task AddLibs(string[] packages){  };
+  private async static Task AddPackages(Project project){  
+    
+    string packageString = $"add {project.name}/{project.name} package ";
+
+    foreach(string package in project.packages)  { 
+      await Exec("dotnet",packageString+ package);
+      AnsiConsole.Write($"{package} added to the project");
+    }
+  }
 
   // private async static Task DDD(){}
 }

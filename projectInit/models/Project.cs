@@ -10,6 +10,7 @@ public class Project{
   public string[]? packages { get; set; }
   public string? archetecture{ get; set; }
 
+
   public string GetGemString(){
    return $"dotnet new { this.type } -o { this.name }"; 
   }

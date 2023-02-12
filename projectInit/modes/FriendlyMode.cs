@@ -4,8 +4,12 @@ namespace projectInit;
 public class FriendlyMode{
 
   public async static Task handle(){
-    Console.Clear();
-    
+
+    string[] packages  = {
+      "Spectre.Console",
+      "Mediatr",
+    };
+
     Project project = new Project();
 
     Dictionary<string,string> projectOptions = new Dictionary<string, string>();
@@ -25,7 +29,11 @@ public class FriendlyMode{
 
     project.type = projectOptions[Menus.show(choices)];
     project.name = GenericUi.ask("Project name");
-    
+
+    // libs
+    if(GenericUi.boolMenu("Do you want to add some packages?"))
+      project.packages = Menus.showMulti(packages);
+
     await ProjectGem.newProject(project);
   }
 }
