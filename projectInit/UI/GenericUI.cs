@@ -11,7 +11,7 @@ public class GenericUi{
   }
 
   public static bool boolMenu(string text){
-    if (!AnsiConsole.Confirm($"[green]{text}[/]?")){
+    if (!AnsiConsole.Confirm($"[green]{text}[/]")){
     AnsiConsole.MarkupLine("Ok... :(");
     return false;
     }
