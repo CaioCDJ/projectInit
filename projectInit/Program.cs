@@ -1,13 +1,21 @@
 ﻿using projectInit;
+using projectInit.Data;
 
-public class Program{
 
-  public async static Task Main(string[] args) {
-    
-    if(args.Length<=0)
-      await FriendlyMode.handle();
-    else
-      await EfficiencyMode.handle(args);
-  }
 
+Database db = await Database.constructor();
+
+
+foreach(Package package in db.Packages){
+  Console.WriteLine($"\nnome:{package.name}\ndesc:{package.desc}");
 }
+
+//await db.SaveChanges();
+/*
+
+if(args.Length<=0)
+  await FriendlyMode.handle();
+else
+  await EfficiencyMode.handle(args);
+
+*/

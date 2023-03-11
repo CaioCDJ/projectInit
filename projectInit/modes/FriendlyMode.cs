@@ -19,6 +19,9 @@ public class FriendlyMode{
     projectOptions.Add("Web Api with Controller [yellow](webapi)[/]","webapi");
     projectOptions.Add("Blazor Client [yellow](blazorwasm)[/]",      "blazorwasm");
     projectOptions.Add("Blazor web server [yellow](blazorserver)[/]","blazorserver");
+    
+    projectOptions.Add("WebApplication [yellow](webapp/razor)[/]","webapp");
+    projectOptions.Add("MVC WebApplication [yellow](mvc)[/]","mvc");
 
     string[] choices = projectOptions.Keys.ToArray();
  
