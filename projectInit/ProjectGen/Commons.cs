@@ -1,0 +1,34 @@
+using projectInit;
+using CliWrap;
+using Spectre.Console;
+
+namespace projectInit.projectGem;
+
+public class GenericGemProcess {
+
+  public static async Task defaultEstruc(string name){
+  
+    Directory.CreateDirectory(name);
+     
+    await Exec("dotnet", $"new sln -o {name}");
+
+    await Exec("dotnet", $"new gitignore -o {name}");
+  }
+
+  public async static Task Exec(string program, string args)
+    => await Cli.Wrap(program)
+      .WithArguments(args)
+      .ExecuteAsync();
+
+  //public async static Task AddTests(Project project){}
+
+  public async static Task AddPackages(Project project){  
+    
+    string packageString = $"add {project.name}/{project.name} package ";
+
+    foreach(string package in project.packages)  { 
+      await Exec("dotnet",packageString+ package);
+      AnsiConsole.Write($"{package} added to the project");
+    }
+  }
+}

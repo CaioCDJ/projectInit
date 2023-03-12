@@ -3,9 +3,9 @@
 
 An easy way of initialize a dotnet project.
 
-## Features
+## Features CheckLsit
 
-- [ ] Spectre Console Ui
 - [X] AddLibs
-- [ ] Templetes ( DDD, CQRS  )
+- [ ] Templetes 
+  - [X] DDD
 - [ ] Reorganize Architecture

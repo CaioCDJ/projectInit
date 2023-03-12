@@ -4,11 +4,10 @@ namespace projectInit;
 
 public class Messages{
 
-  public static void showTitle(string title){
-    var rule = new Rule($"[green]{title}[/]");
-    rule.Justification = Justify.Left;
-    AnsiConsole.Write(rule);
-  }
+  public static void showTitle(string title)
+    => AnsiConsole.Write(
+        new FigletText(title)
+        .Centered());
 
   public static void Success(Project project){
   
@@ -23,8 +22,7 @@ public class Messages{
 
     table.AddRow(new Markup("Project was created succesfully"));
 
-    AnsiConsole.Write(table);
-  
+    AnsiConsole.Write(table);  
   }
 
 }

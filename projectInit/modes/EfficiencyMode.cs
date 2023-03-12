@@ -1,3 +1,5 @@
+using projectInit.projectGem;
+
 namespace projectInit;
 
 public class EfficiencyMode{
@@ -24,6 +26,5 @@ public class EfficiencyMode{
       packages = args.Skip(2).ToArray()
     };    
 
-    await ProjectGem.newProject(project);
-  }
+  } 
 }
