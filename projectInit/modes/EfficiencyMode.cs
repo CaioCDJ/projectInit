@@ -2,29 +2,32 @@ using projectInit.projectGem;
 
 namespace projectInit;
 
-public class EfficiencyMode{
+public class EfficiencyMode
+{
 
-  private static string[] options{ get; set; } = {"help"};
+    private static string[] options { get; set; } = { "help" };
 
-  public async static Task handle(string[] args){
-    
-    /* - tipo []
-     * - nome []
-     * - package[]
-    */
+    public async static Task handle(string[] args)
+    {
 
-    bool op = (args[0]==""|| args[1]=="")
-      ? true
-      : false;
+        /* - tipo []
+         * - nome []
+         * - package[]
+        */
 
-    if(op)
-      Environment.Exit(0);
+        bool op = (args[0] == "" || args[1] == "")
+          ? true
+          : false;
 
-    Project project = new Project(){
-      name = args[0],
-      type = args[1],
-      packages = args.Skip(2).ToArray()
-    };    
+        if (op)
+            Environment.Exit(0);
 
-  } 
+        Project project = new Project()
+        {
+            name = args[0],
+            type = args[1],
+            packages = args.Skip(2).ToArray()
+        };
+    }
+
 }
