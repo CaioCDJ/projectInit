@@ -1,32 +1,19 @@
 using projectInit.projectGem;
-using projectInit.Data;
+using Spectre.Console;
 
 namespace projectInit;
 
 public class FriendlyMode
 {
-
     private static string[] projectTypes = { "Create a Project", "Add a packcage", "remove a package" };
     private static string[] langs = { "C#", "F#" };
 
     public async static Task handle()
     {
+        Messages.showTitle(".Net Initializer");
 
-        Messages.showTitle("Project Initializer");
-        string choice = Menus.show(projectTypes);
-
-        if (choice == projectTypes[0])
-            await createProject();
-
-        else if (choice == projectTypes[1])
-            await AddPackage();
-
-        else
-            await RemovePackage();
-    }
-
-    private async static Task createProject()
-    {
+        var rule = new Rule();
+        AnsiConsole.Write(rule);
 
         Project project = new Project();
 
@@ -51,27 +38,9 @@ public class FriendlyMode
         project.lang = Menus.show(langs);
         // libs
 
-        Database database = await Database.constructor();
-
-        string[] packages = database.Packages.Select(item => item.name).ToArray();
-
-        if (GenericUi.boolMenu("Do you want to add some packages?"))
-            project.packages = Menus.showMulti(packages);
-
-        System.Console.WriteLine(project.lang);
-
         if (project.type == "DDD")
             await DDDProjectGem.run(project);
         else
             await GenericProject.newProject(project);
-
     }
-
-    private async static Task AddPackage() { }
-
-    private async static Task RemovePackage()
-    {
-        Console.Write("removendo um pacote");
-    }
-
 }

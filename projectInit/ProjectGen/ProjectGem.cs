@@ -9,7 +9,7 @@ public class GenericProject
     public async static Task newProject(Project project)
     {
         await AnsiConsole.Status()
-          .Spinner(Spinner.Known.Arc)
+          .Spinner(Spinner.Known.Dots2)
           .SpinnerStyle(Style.Parse("blue bold"))
           .StartAsync("[blue]Creating the project[/]", async ctx =>
           {
@@ -31,14 +31,13 @@ public class GenericProject
               await GenericGemProcess.Exec("dotnet", $"sln {project.name}/{project.name}.sln add {project.name}/{project.name}");
               AnsiConsole.MarkupLine("[green]Solution Generated[/]");
 
-              if (project.packages is not null)
-              {
-                  ctx.Status("[blue]Adding packages[/]");
-                  await GenericGemProcess.AddPackages(project);
-                  AnsiConsole.MarkupLine("[green]Packages Added[/]");
-              }
               AnsiConsole.MarkupLine("[green]Project Generated[/]");
           });
+
+        var rule = new Rule();
+        AnsiConsole.Write(rule);
+
+
         Messages.Success(project);
     }
 }

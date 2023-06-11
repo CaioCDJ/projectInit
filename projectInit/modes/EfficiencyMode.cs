@@ -26,7 +26,6 @@ public class EfficiencyMode
         {
             name = args[0],
             type = args[1],
-            packages = args.Skip(2).ToArray()
         };
     }
 
